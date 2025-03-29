@@ -3,8 +3,8 @@
 
 # Define local and remote paths
 LOCAL_DIR="/PycharmProjects/Datasets/"
-REMOTE_USER="jmcmillen"
-REMOTE_HOST="gaivi.cse.usf.edu"
+REMOTE_USER="your-username"
+REMOTE_HOST="your-server"
 REMOTE_DIR="/nvme/SISLab/Datasets/"
 
 # Ensure the local dataset directory exists
