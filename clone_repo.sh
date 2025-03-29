@@ -11,6 +11,7 @@ fi
 
 # Variables
 REPO_NAME=$1
+PYTHON_VERSION=${2:-3.10}
 GIT_REPO_URL="${GIT_BASE_URL}${REPO_NAME}.git"
 BASE_DIR="/nvme/SISLab/Justin"
 TARGET_DIR="$BASE_DIR/$REPO_NAME"
@@ -22,7 +23,10 @@ mkdir -p "$BASE_DIR"
 # Clone or update the repository
 if [ -d "$TARGET_DIR" ]; then
     echo "Repository already exists at $TARGET_DIR. Pulling latest changes..."
-    cd "$TARGET_DIR" && git pull
+    cd "$TARGET_DIR"
+    git fetch --all
+    git reset --hard origin/main
+    git clean -df
 else
     echo "Cloning repository into $TARGET_DIR..."
     git clone "$GIT_REPO_URL" "$TARGET_DIR"
@@ -46,8 +50,8 @@ if conda env list | grep -q "$ENV_NAME"; then
 fi
 
 # Create a new Conda environment
-echo "Creating new Conda environment: $ENV_NAME"
-conda create --name "$ENV_NAME" python=3.10 -y  # Change version as needed
+echo "Creating new Conda environment $ENV_NAME with Python $PYTHON_VERSION"
+conda create --name "$ENV_NAME" python="$PYTHON_VERSION" -y  # Change version as needed
 
 # Activate the Conda environment
 echo "Activating Conda environment: $ENV_NAME"
@@ -63,5 +67,3 @@ pip install --no-cache-dir -r "$REQ_FILE"
 cd "$TARGET_DIR"
 
 echo "Setup complete. You are now in $TARGET_DIR. Happy Training!"
-exec bash  # Start a new bash shell in the directory
-"clonerepo.sh" 66L, 1932C
