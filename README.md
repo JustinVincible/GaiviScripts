@@ -2,11 +2,11 @@
 
 This repo contains some various linux bash scripts for automation of some tasks that I do often.
 
-# Repository Setup Script
+## Repository Setup Script
 
 This Bash script automates the process of cloning, updating, and setting up a Python development environment for a GitHub repository. It is particularly useful for managing projects that require isolated Conda environments.
 
-## Features
+### Features
 
 Clones a specified GitHub repository (or updates it if it already exists).
 
@@ -18,25 +18,25 @@ Installs dependencies from requirements.txt.
 
 Cleans any existing environment to ensure a fresh setup.
 
-## Usage
+### Usage
 
 Run the script with the following command:
 
-./setup_repo.sh <repo-name> [python-version]
+``./setup_repo.sh <repo-name> [python-version]
 
-## Parameters:
+### Parameters:
 
 <repo-name>: The name of the GitHub repository to clone or update.
 
 [python-version] (optional): The Python version to use (default: 3.10).
 
-## Example
+### Example
 
-./setup_repo.sh MyProject 3.9
+``./setup_repo.sh MyProject 3.9
 
 This will:
 
-Clone or update git@github.com:JustinVincible/MyProject.git into /nvme/SISLab/Justin/MyProject.
+Clone or update git@github.com:<user-name>/MyProject.git into <user-base-dir>.
 
 Remove any existing Conda environment named MyProject_env.
 
@@ -44,15 +44,16 @@ Create a new Conda environment with Python 3.9.
 
 Install dependencies from requirements.txt.
 
-## Prerequisites
+### Prerequisites
 
 Ensure that the following are installed and configured on your system:
 
-Git
+1. Git
+2. Conda (Anaconda or Miniconda)
 
-Conda (Anaconda or Miniconda)
+Update $GIT_BASE_URL and $BASE_DIR inside the script.
 
-Notes
+### Notes
 
 The script assumes that the Conda base environment is correctly set up.
 
@@ -60,13 +61,14 @@ If requirements.txt is missing, the setup process will exit without creating an 
 
 The script uses pip cache purge to prevent corrupted package installations.
 
-## Troubleshooting
+
+### Troubleshooting
 
 If the script fails to activate the Conda environment, ensure that Conda is properly initialized:
-
+```
 conda init bash
 source ~/.bashrc
-
+```
 If the Git repository does not exist, ensure the repository name is correct and that you have the correct SSH access permissions.
 
 
