@@ -9,7 +9,7 @@ fi
 # Variables
 REPO_NAME=$1
 PYTHON_VERSION=${2:-3.10}  # Default to Python 3.10 if not specified
-BASE_DIR="/nvme/SISLab/Justin"
+BASE_DIR="<user-remote-dir>"
 TARGET_DIR="$BASE_DIR/$REPO_NAME"
 ENV_NAME="${REPO_NAME}_env"  # Conda environment name
 

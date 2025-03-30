@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Default local directory
-LOCAL_BASE_DIR="/home/justin/PycharmProjects/gaivi_downloads"
-USER_NAME="user-name"
+LOCAL_BASE_DIR="<download-dir>"
+USER_NAME="<gaivi-username>"
 # Check for required arguments
 if [ "$#" -lt 1 ]; then
     echo "Usage: $0 <remote_folder> [local_folder]"

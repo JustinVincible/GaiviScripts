@@ -3,9 +3,9 @@
 
 # Define local and remote paths
 LOCAL_DIR="/PycharmProjects/Datasets/"
-REMOTE_USER="your-username"
-REMOTE_HOST="your-server"
-REMOTE_DIR="/nvme/SISLab/Datasets/"
+REMOTE_USER="<your-username>"
+REMOTE_HOST="<your-server>"
+REMOTE_DIR="<remote-dir>"
 
 # Ensure the local dataset directory exists
 if [ ! -d "$HOME$LOCAL_DIR" ]; then

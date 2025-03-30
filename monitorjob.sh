@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# TODO make this work lol.
 # Check if job ID is provided
 if [ -z "$1" ]; then
     echo "Usage: $0 <JOB_ID>"
