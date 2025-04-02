@@ -12,6 +12,8 @@ Using the SLURM cluster at USF involves the following key steps:
 
 Each step can be done manually or quickly automated using the provided scripts. Below, we describe both approaches.
 
+This repository is designed to supplement the documentation found at https://docs.gaivi.cse.usf.edu/doku.php?id=main:gaivi:start
+
 ---
 
 ## Connecting to the Cluster
