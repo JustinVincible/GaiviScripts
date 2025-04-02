@@ -1,6 +1,99 @@
-# Gaivi Scripts
+# USF SLURM Cluster Guide
 
-This repo contains some various linux bash scripts for automation of some tasks that I do often.
+## Summary of Steps
+
+Using the SLURM cluster at USF involves the following key steps:
+
+1. **Login to the Cluster**: Connect via SSH to `gaivi.cse.usf.edu`.
+2. **Transfer Data**: Move datasets to the cluster using `rsync` or the provided sync script.
+3. **Setup Environment**: Clone a GitHub repository and set up a Conda environment manually or use the provided setup script.
+4. **Submit a Job**: Create and submit a SLURM job script, or use the example script for automated submission.
+5. **Retrieve Results**: Download job results using `rsync` or the supplied retrieval script.
+
+Each step can be done manually or quickly automated using the provided scripts. Below, we describe both approaches.
+
+---
+
+## Connecting to the Cluster
+
+To use the SLURM cluster at USF, you need to connect via SSH. Open a terminal and run:
+
+```bash
+ssh <your-username>@gaivi.cse.usf.edu
+```
+
+Replace `<your-username>` with your actual username.
+
+---
+
+## Moving Files to the Cluster
+
+To transfer datasets to the cluster, use `rsync`:
+
+```bash
+rsync -avz /local/path/ <your-username>@gaivi.cse.usf.edu:/remote/path/
+```
+
+Alternatively, run the provided script:
+
+```bash
+bash sync_datasets.sh
+```
+
+---
+
+## Setting Up a Development Environment
+
+Manually, clone a GitHub repository and set up an environment:
+
+```bash
+git clone git@github.com:JustinVincible/<repo-name>.git
+cd <repo-name>
+conda create --name <env-name> python=3.10 -y
+conda activate <env-name>
+pip install -r requirements.txt
+```
+
+Or, run the provided script:
+
+```bash
+bash setup_env.sh <repo-name>
+```
+
+---
+
+## Submitting a SLURM Job
+
+To submit a job manually:
+
+1. Create a job script (e.g., `submit_job.sh`).
+2. Submit it with:
+   ```bash
+   sbatch submit_job.sh
+   ```
+
+Or, use the provided script:
+
+```bash
+bash submit_job.sh
+```
+
+---
+
+## Retrieving Results
+
+Manually, download results with `rsync`:
+
+```bash
+rsync -avz <your-username>@gaivi.cse.usf.edu:/remote/path/ /local/path/
+```
+
+Or, use the provided script:
+
+```bash
+bash download_results.sh <remote-folder>
+```
+# Script descriptions
 
 ## clone_repo.sh
 
@@ -140,4 +233,3 @@ Uploads new datasets that exist locally but not remotely.
 Ensure SSH access to the remote server is configured.
 
 Set correct paths for local and remote dataset directories.
-
