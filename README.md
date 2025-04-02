@@ -93,7 +93,79 @@ Or, use the provided script:
 ```bash
 bash download_results.sh <remote-folder>
 ```
-# Script descriptions
+# About each shell script
+
+Note: Setting up a Github SSH key is required to use these automation scripts.
+
+## Adding SSH Keys from GitHub to the USF GAIVI Slurm Cluster
+
+This guide explains how to add your SSH key from GitHub to the USF Slurm cluster (`gaivi.cse.usf.edu`) to enable secure and passwordless authentication.
+
+### Step 1: Check for Existing SSH Keys
+Before generating a new SSH key, check if you already have one:
+```bash
+ls -al ~/.ssh
+```
+If you see files like `id_rsa` and `id_rsa.pub`, you already have a key pair. You can use the existing key or generate a new one.
+
+### Step 2: Generate a New SSH Key (If Needed)
+If you don't have an SSH key, generate a new one using:
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+Replace `your_email@example.com` with your GitHub email. Press Enter to accept the default file location (`~/.ssh/id_ed25519`). Optionally, set a passphrase for added security.
+
+### Step 3: Add the SSH Key to the SSH Agent
+Ensure the SSH agent is running:
+```bash
+eval "$(ssh-agent -s)"
+```
+Then add your private key:
+```bash
+ssh-add ~/.ssh/id_ed25519
+```
+
+### Step 4: Add the SSH Key to Your GitHub Account
+Copy your public key to the clipboard:
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+Go to **GitHub → Settings → SSH and GPG keys** and add a new SSH key. Paste the copied key and save it.
+
+### Step 5: Copy the SSH Key to the GAIVI Cluster
+Use `ssh-copy-id` to add your key to the cluster:
+```bash
+ssh-copy-id -i ~/.ssh/id_ed25519.pub your_netid@gaivi.cse.usf.edu
+```
+Replace `your_netid` with your USF NetID. If prompted, enter your password to complete the process.
+
+Alternatively, manually append your key to the remote `~/.ssh/authorized_keys` file:
+```bash
+cat ~/.ssh/id_ed25519.pub | ssh your_netid@gaivi.cse.usf.edu 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
+```
+
+### Step 6: Test SSH Connection
+Verify that SSH works without a password:
+```bash
+ssh your_netid@gaivi.cse.usf.edu
+```
+If you connect without a password prompt, the setup is successful.
+
+### Step 7: Configure Git to Use SSH on GAIVI
+Once inside the cluster, configure Git to use SSH:
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your_email@example.com"
+```
+Test the connection with:
+```bash
+git clone git@github.com:your_username/your_repo.git
+```
+Replace `your_username/your_repo.git` with your actual repository.
+
+---
+You are now set up to use SSH authentication for GitHub on the GAIVI Slurm cluster!
+
 
 ## clone_repo.sh
 
