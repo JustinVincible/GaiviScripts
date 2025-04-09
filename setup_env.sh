@@ -40,11 +40,11 @@ conda activate "$ENV_NAME"
 # Install manual packages line by line
 MANUAL_FILE="$TARGET_DIR/manual_packages.txt"
 if [ -f "$MANUAL_FILE" ]; then
-    echo "Installing manual packages one by one from manual_packages.txt..."
-    while IFS= read -r package || [ -n "$package" ]; do
-        if [[ ! -z "$package" && ! "$package" =~ ^# ]]; then  # Skip empty lines and comments
-            echo "Installing: $package"
-            pip install --no-cache-dir "$package" || echo "Failed to install: $package"
+    echo "Executing pip install commands from manual_packages.txt..."
+    while IFS= read -r cmd || [ -n "$cmd" ]; do
+        if [[ ! -z "$cmd" && ! "$cmd" =~ ^# ]]; then  # Skip empty lines and comments
+            echo "Running: $cmd"
+            eval "$cmd" || echo "⚠️  Failed to run: $cmd"
         fi
     done < "$MANUAL_FILE"
 else
